@@ -1,0 +1,108 @@
+<%- include('partials/header')  %>
+
+    <!-- ========= VIDEO BACKGROUND ========== -->
+    <section id="costa-victoria" style="margin: 0; padding: 0;">
+        <div class="video-bg">
+            <video autoplay muted loop style="height: 98vh;">
+                <source src="/Img/FATA_Video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="container">
+            <div class="video-content">
+                <h2>FATA Regions</h2>
+                <span><i class="fa fa-users"></i> 5,001,676+</span>
+                <span><i class="fa fa-globe"></i> 7+ Districts</span>
+                <span><i class="fa fa-location-dot"></i> Khyber Pakhtunkhwa</span>
+
+            </div>
+        </div>
+    </section>
+    <!-- ========= VIDEO BACKGROUND End ========== -->
+
+    <!-- ===== Choose your place========== -->
+    <section id="choose-place">
+        <div class="container">
+            <p class="heading-normal-txt">CHOOSE YOUR PLACE</p>
+            <h2 class="headings">POPULAR <span>PLACES</span></h2>
+            <div class="choose-wrapper">
+                <% places.sort((a, b)=> b.ratings - a.ratings);
+                    %>
+                    <% places.forEach((place, counter)=> { %>
+                        <% if (counter===0) { %>
+                            <div class="img-right-side">
+                                <div class="lg-img">
+                                    <img src="<%= place.image %>" alt="">
+                                    <div class="img-content">
+                                        <h2>
+                                            <%= place.name %>
+                                        </h2>
+                                        <div class="hidden-content">
+                                            <span><i class="fa fa-map"></i> 10+ Regions</span>
+                                            <span><i class="fa fa-users"></i>40,000+</span>
+                                            <span><i class="fa fa-location-dot"></i>
+                                                <%= place.name %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="price-label">
+                                        <p>R: <%= place.ratings %> /5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } else if (counter===1) { %>
+                                <div class="img-left-side">
+                                    <div class="lg-img">
+                                        <img src="<%= place.image %>" alt="">
+                                        <div class="img-content">
+                                            <h2>
+                                                <%= place.name %>
+                                            </h2>
+                                            
+                                                <div class="hidden-content">
+                                                    <span><i class="fa fa-map"></i> 10+ Regions</span>
+                                                    <span><i class="fa fa-users"></i>40,000+</span>
+                                                    <span><i class="fa fa-location-dot"></i>
+                                                        <%= place.name %>
+                                                    </span>
+                                                </div>
+                                        
+                                        </div>
+                                        <div class="price-label">
+                                            <p>R:<%= place.ratings %> /5</p>
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
+            <% } else { %>
+                <% if (counter===2) { %>
+                    <div class="row-wise-img">
+                        <% } %>
+                            <div class="lg-img">
+                                <img src="<%= place.image %>" alt="">
+                                <div class="img-content">
+                                    <h2>
+                                        <%= place.name %>
+                                    </h2>
+                                    <div class="hidden-content">
+                                        <span><i class="fa fa-map"></i> 10+ Regions</span>
+                                        <span><i class="fa fa-users"></i>40,000+</span>
+                                        <span><i class="fa fa-location-dot"></i>
+                                            <%= place.name %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="price-label">
+                                    <p>R:<%= place.ratings %> /5</p>
+                                </div>
+                            </div>
+                            <% if (counter===places.length - 1) { %>
+                    </div>
+                    <% } %>
+                        <% } %>
+                            <% }); %>
+
+        </div>
+    </section>
+    <!-- ===== choose your place end========== -->
+
+<%- include('partials/footer')  %>

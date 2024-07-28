@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+    <!-- ========= Top Destination ========= -->
+    <section id="top-destination">
+        <div class="container">
+            <p class="heading-normal-txt">TOP DESTINATION</p>
+            <h2 class="headings">POPULAR <span>DESTINATIONS</span></h2>
+            <div class="top-destination-wrapper swiper-container">
+                <div class="swiper-wrapper">
+                    <% places.forEach(place=> {
+                        place.regions.sort((a, b) => b.ratings - a.ratings); // Sort regions by ratings
+                        }); %>
+                        <% places.forEach(place=> { %>
+                            <% place.regions.forEach(region=> { %>
+                                <div class="swiper-slide carousel">
+                                    <img src="<%= region.image %>" alt="">
+                                    <div class="carousel-img-overlay">
+                                        <div class="img-content">
+                                            <h2><i class="fa fa-location-dot"></i>
+                                                <%= region.name %>
+                                            </h2>
+                                            <div class="hidden-content-carousel">
+                                                <span>
+                                                    <%= place.name %>
+                                                </span>
+                                                <a href="/region/<%=region.name%>"><span>Explore</span><i class="fa fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-label">
+                                        <p>
+                                            <%= region.ratings %> ⭐
+                                        </p>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========= Top Destination End ========= -->
+     
+<%- include('partials/footer') %>

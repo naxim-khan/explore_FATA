@@ -1,0 +1,177 @@
+
+<head>
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles for Regions */
+#regions-container {
+    margin-top: 20px;
+}
+
+.region {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+.region label {
+    display: block;
+    font-weight: normal;
+}
+
+#add-region {
+    margin-top: 10px;
+    background-color: #28a745;
+}
+
+#add-region:hover {
+    background-color: #218838;
+}
+
+    </style>
+</head>
+
+<main>
+    <div class="container">
+        <h1>Upload New Place</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Place Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Place Image URL:</label>
+                <input type="text" id="image" name="image" required>
+            </div>
+            <div class="form-group">
+                <label for="ratings">Place Ratings:</label>
+                <input type="number" id="ratings" name="ratings" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Place Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="lat">Place Latitude:</label>
+                <input type="number" id="lat" name="lat" step="any" required>
+            </div>
+            <div class="form-group">
+                <label for="lng">Place Longitude:</label>
+                <input type="number" id="lng" name="lng" step="any" required>
+            </div>
+            <div class="form-group">
+                <h3>Regions</h3>
+                <div id="regions-container">
+                    <div class="region">
+                        <label for="region-name">Region Name:</label>
+                        <input type="text" name="regions[name][]" required>
+                        <label for="region-image">Region Image URL:</label>
+                        <input type="text" name="regions[image][]" required>
+                        <label for="region-description">Region Description:</label>
+                        <textarea name="regions[description][]" rows="2" required></textarea>
+                        <label for="region-ratings">Region Ratings:</label>
+                        <input type="number" name="regions[ratings][]" step="0.1" required>
+                        <label for="region-lat">Region Latitude:</label>
+                        <input type="number" name="regions[lat][]" step="any" required>
+                        <label for="region-lng">Region Longitude:</label>
+                        <input type="number" name="regions[lng][]" step="any" required>
+                    </div>
+                </div>
+                <button type="button" id="add-region">Add Another Region</button>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('add-region').addEventListener('click', function() {
+            const container = document.getElementById('regions-container');
+            const newRegion = document.createElement('div');
+            newRegion.classList.add('region');
+            newRegion.innerHTML = `
+                <label for="region-name">Region Name:</label>
+                <input type="text" name="regions[name][]" required>
+                <label for="region-image">Region Image URL:</label>
+                <input type="text" name="regions[image][]" required>
+                <label for="region-description">Region Description:</label>
+                <textarea name="regions[description][]" rows="2" required></textarea>
+                <label for="region-ratings">Region Ratings:</label>
+                <input type="number" name="regions[ratings][]" step="0.1" required>
+                <label for="region-lat">Region Latitude:</label>
+                <input type="number" name="regions[lat][]" step="any" required>
+                <label for="region-lng">Region Longitude:</label>
+                <input type="number" name="regions[lng][]" step="any" required>
+            `;
+            container.appendChild(newRegion);
+        });
+    </script>
+</main>
+
+
+

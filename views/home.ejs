@@ -1,0 +1,582 @@
+<%- include('partials/header') %>
+
+    <!-- ====== SHOWCASE START ===========  -->
+    <main>
+        <div class="slider-container swiper ">
+            <div class="slide-content swiper-wrapper">
+                <% places.forEach(place=> { %>
+                    <div class="overlay swiper-slide">
+                        <img src="<%=place.image%>" alt="<%= place.image %>">
+                        <div class="img-overlay">
+                            <p>Lets Explore FATA</p>
+                            <h2><span>District</span>
+                                <%= place.name %>
+                            </h2>
+                            <h3>
+                                <%= place.description %>
+                            </h3>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+    </main>
+    <!-- ====== SHOWCASE End ===========  -->
+
+    <!-- ===== Search Location ========== -->
+    <section id="location-search">
+        <div class="container">
+            <div class="form-wrapper">
+                <form id="search-form" action="/district" method="GET">
+                    <!-- Search Input -->
+                    <input class="form-container" type="text" placeholder="Where to?" id="search-input" name="search">
+
+                    <!-- District Dropdown -->
+                    <select class="form-control" id="district-select" name="district">
+                        <option value="">Select a District</option>
+                        <% places.forEach(place=> { %>
+                            <option value="<%= place.name %>">
+                                <%= place.name %>
+                            </option>
+                            <% }); %>
+                    </select>
+
+                    <!-- Region Dropdown -->
+                    <!-- <select class="form-control" id="region-select" name="region">
+                    <option  value="">Select a Region</option>
+                </select> -->
+
+                    <!-- Search Button -->
+                    <button type="submit" class="primary-btn">Search Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- ===== Search Location End========== -->
+
+
+
+    <!-- ===== About ========== -->
+    <section id="about">
+        <div class="container">
+            <div class="about-content-wrapper">
+                <div class="agency-left-side">
+                    <p class="heading-normal-txt">BEST SITE TO EXPLORE FATA</p>
+                    <h2 class="headings">DISCOVER THE <span>WORLD</span> WITH OUR GUIDE</h2>
+                    <p class="lead">
+                        Welcome to Explore FATA, your ultimate guide to the former Federally Administered Tribal Areas.
+                    <p class="lead">
+                        Our mission is to showcase the region's beauty, heritage, and culture.
+                    </p>
+
+                    <ul>
+                        <li>
+                            <div class="icons">
+                                <i class="fa fa-check"></i>
+                                <p>20 Years of Experience</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icons">
+                                <i class="fa fa-check"></i>
+                                <p>20 Tourism Regions</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icons">
+                                <i class="fa fa-phone-volume"></i>
+                                <p>+923 433 343</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="agency-right-side">
+                    <div class="img">
+                        <img src="Img/aboutImg.jpg" alt="picture">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ===== About End========== -->
+
+    <!-- ===== Choose your place========== -->
+    <section id="choose-place">
+        <div class="container">
+            <p class="heading-normal-txt">CHOOSE YOUR PLACE</p>
+            <h2 class="headings">POPULAR <span>PLACES</span></h2>
+            <div class="choose-wrapper">
+                <% places.sort((a, b)=> b.ratings - a.ratings);
+                    %>
+                    <% places.forEach((place, counter)=> { %>
+                        <% if (counter===0) { %>
+                            <div class="img-right-side">
+                                <div class="lg-img">
+                                    <img src="<%= place.image %>" alt="">
+                                    <div class="img-content">
+                                        <h2>
+                                            <%= place.name %>
+                                        </h2>
+                                        <div class="hidden-content">
+                                            <span><i class="fa fa-map"></i> 10+ Regions</span>
+                                            <span><i class="fa fa-users"></i>40,000+</span>
+                                            <span><i class="fa fa-location-dot"></i>
+                                                <%= place.name %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="price-label">
+                                        <p>R: <%= place.ratings %> /5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } else if (counter===1) { %>
+                                <div class="img-left-side">
+                                    <div class="lg-img">
+                                        <img src="<%= place.image %>" alt="">
+                                        <div class="img-content">
+                                            <h2>
+                                                <%= place.name %>
+                                            </h2>
+                                            
+                                                <div class="hidden-content">
+                                                    <span><i class="fa fa-map"></i> 10+ Regions</span>
+                                                    <span><i class="fa fa-users"></i>40,000+</span>
+                                                    <span><i class="fa fa-location-dot"></i>
+                                                        <%= place.name %>
+                                                    </span>
+                                                </div>
+                                        
+                                        </div>
+                                        <div class="price-label">
+                                            <p>R:<%= place.ratings %> /5</p>
+                                        </div>
+                                    </div>
+                                </div>
+            </div>
+            <% } else { %>
+                <% if (counter===2) { %>
+                    <div class="row-wise-img">
+                        <% } %>
+                            <div class="lg-img">
+                                <img src="<%= place.image %>" alt="">
+                                <div class="img-content">
+                                    <h2>
+                                        <%= place.name %>
+                                    </h2>
+                                    <div class="hidden-content">
+                                        <span><i class="fa fa-map"></i> 10+ Regions</span>
+                                        <span><i class="fa fa-users"></i>40,000+</span>
+                                        <span><i class="fa fa-location-dot"></i>
+                                            <%= place.name %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="price-label">
+                                    <p>R:<%= place.ratings %> /5</p>
+                                </div>
+                            </div>
+                            <% if (counter===places.length - 1) { %>
+                    </div>
+                    <% } %>
+                        <% } %>
+                            <% }); %>
+
+        </div>
+    </section>
+    <!-- ===== choose your place end========== -->
+
+    <!-- ========= STAIIC COUNTER NUMBERS ====== -->
+    <section id="static-container" style="background-image: url(/Img/Kurram_parachinar.jpg);">
+        <div class="container">
+            <div class="static-wrapper">
+                <div class="static-icons">
+                    <i class="fa fa-plane-departure"></i>
+                    <p class="number" data-ceil="600">600</p>
+                    <p class="txt">Flight Booking</p>
+                </div>
+                <div class="static-icons">
+                    <i class="fa fa-home"></i>
+                    <p class="number" data-ceil="200">200</p>
+                    <p class="txt">Amazing Tour</p>
+                </div>
+                <div class="static-icons">
+                    <i class="fa fa-ship"></i>
+                    <p class="number" data-ceil="200">200</p>
+                    <p class="txt">Cruises Booking</p>
+                </div>
+                <div class="static-icons">
+                    <i class="fa fa-ticket"></i>
+                    <p class="number" data-ceil="100">100</p>
+                    <p class="txt">Ticket Booking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ======== STATIC COUNTER NUMBER END ======= -->
+    <!-- ========= Top Destination ========= -->
+    <section id="top-destination">
+        <div class="container">
+            <p class="heading-normal-txt">TOP DESTINATION</p>
+            <h2 class="headings">POPULAR <span>DESTINATIONS</span></h2>
+            <div class="top-destination-wrapper swiper-container">
+                <div class="swiper-wrapper">
+                    <% places.forEach(place=> {
+                        place.regions.sort((a, b) => b.ratings - a.ratings); // Sort regions by ratings
+                        }); %>
+                        <% places.forEach(place=> { %>
+                            <% place.regions.forEach(region=> { %>
+                                <div class="swiper-slide carousel">
+                                    <img src="<%= region.image %>" alt="">
+                                    <div class="carousel-img-overlay">
+                                        <div class="img-content">
+                                            <h2><i class="fa fa-location-dot"></i>
+                                                <%= region.name %>
+                                            </h2>
+                                            <div class="hidden-content-carousel">
+                                                <span>
+                                                    <%= place.name %>
+                                                </span>
+                                                <a href="/region/<%=region.name%>"><span>Explore</span><i class="fa fa-arrow-right"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="price-label">
+                                        <p>
+                                            <%= region.ratings %> ⭐
+                                        </p>
+                                    </div>
+                                </div>
+                                <% }); %>
+                                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========= Top Destination End ========= -->
+<!-- ========= VIDEO BACKGROUND ========== -->
+<section id="costa-victoria" style="margin: 0; padding: 0;">
+    <div class="video-bg">
+        <video autoplay muted loop style="height: 550px;">
+            <source src="/Img/FATA_Video.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="container">
+        <div class="video-content">
+            <h2>Discover FATA</h2>
+            <span><i class="fa fa-users"></i> 5,001,676+</span>
+            <span><i class="fa fa-globe"></i> 7+ Districts</span>
+            <span><i class="fa fa-location-dot"></i> Khyber Pakhtunkhwa</span>
+
+        </div>
+    </div>
+</section>
+<!-- ========= VIDEO BACKGROUND End ========== -->
+ <!-- ====== Travel Countries ========== -->
+ <section id="travel-countries">
+    <div class="container">
+        <p class="heading-normal-txt">MOST POPULAR</p>
+        <h2 class="headings">Travel <span>Regions</span></h2>
+        <% places.slice(0,2).forEach((place, index)=> { %>
+            <% place.regions.sort((a, b)=> b.ratings - a.ratings); %>
+                <!-- Alternate display of places -->
+                <% if (index % 2===0) { %>
+                    <!-- First section -->
+                    <div class="travel-countries-wrapper">
+                        <div class="countries-content">
+                            <h2 class="secondary-heading">
+                                <%= place.name %>
+                            </h2>
+                            <p class="lead">
+                                District <%= place.name %> a beautiful place to visit. The main region of this
+                                    district is <%= place.description %>
+                            </p>
+                            <ul>
+                                <% let regionName2="" %>
+                                    <% place.regions.forEach(region=> { %>
+                                        <% regionName2=region.name %>
+                                            <a href="/region/<%= region.name %>">
+                                                <li class="country-names"><i class="fa fa-location-dot"></i>
+                                                    <%= region.name %>
+                                                </li>
+                                            </a>
+                                            <% }); %>
+                            </ul>
+                            <a href="/district/<%=place.name%>"><button type="button" class="primary-btn">Explore <i
+                                        class="fa fa-arrow-right"></i></button></a>
+                        </div>
+                        <div class="slider-content-wrapper swiper3">
+                            <div class="swiper-wrapper">
+                                <% let regionName="" %>
+                                    <% place.regions.forEach(region=> { %>
+                                        <% regionName=region.name %>
+                                            <div class="swiper-slide carousel">
+                                                <img src="<%= region.image %>" alt="">
+                                                <div class="carousel-img-verlay">
+                                                    <div class="img-content">
+                                                        <h2><i class="fa fa-location-dot"></i>
+                                                            <%= region.name %>
+                                                        </h2>
+                                                        <div class="hidden-content-carousel">
+                                                            <span>
+                                                                <a class="btn-primary" href="/region/<%=regionName%>">Explore</a></span><i class="fa fa-arrow-right"></i>
+                                                            <span>
+                                                                <i class="fa fa-user"></i> Ratings: <%=
+                                                                    region.ratings %>
+                                                            </span>
+                                                            <span><i class="fa fa-location-dot"></i>
+                                                                <%= place.name %>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="price-label">
+                                                    <p>
+                                                        <%= region.ratings %> ⭐
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <!-- Second section -->
+                        <div class="second-content">
+                            <div class="slider-content-wrapper swiper3">
+                                <div class="swiper-wrapper">
+                                    <% let regionName3="" %>
+                                    <% place.regions.forEach(region=> { %>
+                                        <% regionName3=region.name%>
+                                        <div class="swiper-slide carousel">
+                                            <img src="<%= region.image %>" alt="">
+                                            <div class="carousel-img-verlay">
+                                                <div class="img-content">
+                                                    <h2><i class="fa fa-location-dot"></i>
+                                                        <%= region.name %>
+                                                    </h2>
+                                                    <div class="hidden-content-carousel">
+                                                        <span><i class="fa fa-arrow-left"></i><a
+                                                                href="/region/<%=region.name%>">Explore</a></span>
+                                                        <span><i class="fa fa-user"></i> Ratings: <%= region.ratings
+                                                                %></span>
+                                                        <span><i class="fa fa-location-dot"></i>
+                                                            <%= place.name %>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price-label">
+                                                <p>
+                                                    <%= region.ratings %> ⭐
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                            </div>
+                            <div class="countries-content">
+                                <h2 class="secondary-heading">
+                                    <%= place.name %>
+                                </h2>
+                                <p class="lead">
+                                    District <%= place.name %> is a beautiful place. Its main region is <%=
+                                            place.description %>. Below is the list of all the regions.
+                                </p>
+                                <div class="country-names">
+                                    <ul>
+                                        <% place.regions.forEach(region=> { %>
+                                            <a href="/region/<%=region.name%>">
+                                                <li>
+                                                    <i class="fa fa-location-dot"></i>
+                                                    <%= region.name %>
+                                                </li>
+                                            </a>
+                                            <% }); %>
+                                    </ul>
+                                </div>
+                                <a href="/district/<%=place.name%>">
+                                    <button type="button" class="primary-btn">Explore <i
+                                        class="fa fa-arrow-right"></i></button>
+                                </a>
+                            </div>
+                        </div>
+                        <% } %>
+                            <% }); %>
+    </div>
+</section>
+<!-- ====== Travel Countries end========== -->
+
+
+    <!-- ===== Travel Blog ========= -->
+    <section id="travel-blog">
+        <div class="container">
+            <p class="heading-normal-txt">TRAVEL BLOG</p>
+            <h2 class="headings">TRAVEL<span> EXPERIENCE</span></h2>
+            <div class="top-destination-wrapper swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide blog">
+                        <img src="Img/about-img.jpg" alt="">
+                        <div class="blog-img-verlay">
+                            <div class="blog-img-content">
+                                <h2>Tours</h2>
+                                <p class="lead">Small Group Tours with fligts from USA</p>
+                                <div class="blog-content-carousel">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-label">
+                            <p>05 Dec</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide blog">
+                        <img src="Img/about-img.jpg" alt="">
+                        <div class="blog-img-verlay">
+                            <div class="blog-img-content">
+                                <h2>Tours</h2>
+                                <p class="lead">Small Group Tours with fligts from USA</p>
+                                <div class="blog-content-carousel">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-label">
+                            <p>05 Dec</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide blog">
+                        <img src="Img/about-img.jpg" alt="">
+                        <div class="blog-img-verlay">
+                            <div class="blog-img-content">
+                                <h2>Tours</h2>
+                                <p class="lead">Small Group Tours with fligts from USA</p>
+                                <div class="blog-content-carousel">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-label">
+                            <p>05 Dec</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide blog">
+                        <img src="Img/about-img.jpg" alt="">
+                        <div class="blog-img-verlay">
+                            <div class="blog-img-content">
+                                <h2>Tours</h2>
+                                <p class="lead">Small Group Tours with fligts from USA</p>
+                                <div class="blog-content-carousel">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-label">
+                            <p>05 Dec</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide blog">
+                        <img src="Img/about-img.jpg" alt="">
+                        <div class="blog-img-verlay">
+                            <div class="blog-img-content">
+                                <h2>Tours</h2>
+                                <p class="lead">Small Group Tours with fligts from USA</p>
+                                <div class="blog-content-carousel">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-label">
+                            <p>05 Dec</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== Travel Blog End ========= -->
+
+    <!-- ========= TESTIMONIALS =========== -->
+    <section id="testimonials">
+        <div class="container">
+            <p class="heading-normal-txt">Travel Blog</p>
+            <h2 class="headings">TRAVEL EXPERIENCE</h2>
+            <div class="testimonials-wrapper swiper4">
+                <div class="swiper-wrapper">
+
+                    <div class="testimonials-content swiper-slide">
+                        <p class="lead">
+                            <i class="fa-solid fa-quote-left"></i>
+                            The website’s layout is clean and intuitive. Navigation is straightforward, making it easy for users to find the information they need without any hassle.
+                            <i class="fa-solid fa-quote-right"></i>
+                        </p>
+                        <div class="test-img">
+                            <img src="/Img/profile3.png"
+                                alt="">
+
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p>Nazeem Khan</p>
+                            <p class="guest"> Guest Review</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonials-content swiper-slide">
+                        <p class="lead">
+                            <i class="fa-solid fa-quote-left"></i>
+                            Each destination page is rich with information, including historical background, must-see attractions, local cuisine recommendations, and practical travel tips. This makes it an excellent resource for both first-time visitors and seasoned travelers.
+                            <i class="fa-solid fa-quote-right"></i>
+                        </p>
+                        <div class="test-img">
+                            <img src="/Img/profile.png"
+                                alt="">
+
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <!-- <i class="fa-solid fa-star"></i> -->
+                            <p>Sohail Ahmad</p>
+                            <p class="guest"> Guest Review</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonials-content swiper-slide">
+                        <p class="lead">
+                            <i class="fa-solid fa-quote-left"></i>
+                            The website performs well on both desktop and mobile devices. The responsive design ensures that users have a consistent and pleasant experience regardless of the device they are using.
+                            <i class="fa-solid fa-quote-right"></i>
+                        </p>
+                        <div class="test-img">
+                            <img src="/Img/profile2.png"
+                                alt="">
+
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <!-- <i class="fa-solid fa-star"></i> -->
+                            <p>Sameer Jafree</p>
+                            <p class="guest"> Guest Review</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== TESTIMONIALS END ===== -->
+
+    <%- include("partials/footer") %>
