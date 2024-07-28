@@ -24,10 +24,7 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
   }).catch((err)=>{
     console.log("caught error connecting mongodb :",err);
   });
-app.get('/', async(req, res) => {
-    const places = await Place.find().select('name description image ratings regions description');
-    res.render("home",{places});
-});
+
 app.use('/', indexRoutes);
 
 app.listen(port, ()=>{
