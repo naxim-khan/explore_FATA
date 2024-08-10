@@ -1,0 +1,50 @@
+<%- include('partials/header')  %>
+<!-- Destination Start -->
+<div class="container-xxl py-5 destination">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">FATA Districts</h6>
+            <h1 class="mb-5">Popular Districts</h1>
+        </div>
+        <div class="row g-3">
+            <div class="col-lg-7 col-md-6 right-side-images">
+                <div class="row g-3">
+                    <% places.sort((a, b) => b.ratings - a.ratings).forEach((place, index) => { %>
+                        <% if (index < 4 && index !== 1) { %>
+                            <div class="<%= index === 0 ? 'col-lg-12' : 'col-lg-6' %> col-md-12 wow zoomIn" data-wow-delay="0.<%= 1 + index * 2 %>s">
+                                <a class="position-relative d-block overflow-hidden" href="/district/<%- place.name %>">
+                                    <img class="img-fluid" src="<%= place.image %>" alt="<%= place.name %>">
+                                    <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2"><%= place.ratings %> ⭐</div>
+                                    <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"><%= place.name %></div>
+                                </a>
+                            </div>
+                        <% } %>
+                    <% }); %>
+                </div>
+            </div>
+            <% if (places.length > 1) { %>
+                <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
+                    <a class="position-relative d-block h-100 overflow-hidden" href="/district/<%- places[1].name %>">
+                        <img class="img-fluid position-absolute w-100 h-100" src="<%= places[1].image %>" alt="<%= places[1].name %>" style="object-fit: cover;">
+                        <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2"><%= places[1].ratings %> ⭐</div>
+                        <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"><%= places[1].name %></div>
+                    </a>
+                </div>
+            <% } %>
+            <!-- row direction images -->
+            <% places.slice(2).forEach((place, index) => { %>
+                <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.<%= 2 + index * 2 %>s">
+                    <a class="position-relative d-block overflow-hidden" href="/district/<%- place.name %>">
+                        <img class="img-fluid" src="<%= place.image %>" alt="<%= place.name %>" style="width: 100%; height: 300px; object-fit: cover;">
+                        <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2"><%= place.ratings %> ⭐</div>
+                        <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2"><%= place.name %></div>
+                    </a>
+                </div>
+            <% }); %>
+            
+        </div>
+    </div>
+    
+</div>
+<!-- Destination End -->
+<%- include('partials/footer')  %>

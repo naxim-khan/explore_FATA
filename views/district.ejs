@@ -1,573 +1,204 @@
 <%- include('partials/header') %>
+    <!-- About Start -->
+    <div class="container-xxl py-5" style="margin-top: 2.5rem;">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <!-- <img class="img-fluid position-absolute w-100 h-100" src="/img/about-img2.jpg" alt="" style="object-fit: cover;"> -->
+                        <div id="map" class="w-100 h-100"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <h6 class="section-title bg-white text-start text-primary pe-3">
+                        <%= place.name %>
+                    </h6>
+                    <h1 class="mb-4">Welcome to <span class="text-primary">
+                            <%= place.name %>
+                        </span></h1>
+                    <p class="mb-4">
+                        Nestled in the majestic mountains of Pakistan's northwestern region, <%= place.name %> is a hidden gem waiting to be explored.</p>
+                    <p class="mb-4">
+                        This area boasts breathtaking landscapes, from rolling hills and lush green valleys to crystal-clear rivers that wind through the terrain. <%= place.name %> natural beauty is complemented by its rich cultural heritage, where ancient traditions and modern life coexist harmoniously. Visitors are greeted with warm hospitality, vibrant local markets, and a tapestry of history that dates back centuries. Whether you're seeking adventure in its rugged landscapes or simply want to immerse yourself in its serene environment, <%= place.name %> offers an unforgettable experience for all who venture into its captivating beauty.
+                    </p>
+                    <div class="row gy-2 gx-4 mb-4">
+                        <h6 class="section-title bg-white text-start text-primary pe-3">
+                            <%= place.name %> Regions
+                        </h6>
+                        <% place.regions.forEach(function(region) { %>
+                            <div class="col-sm-6">
+                                <a href="/region/<%- region.name %>">
+                                    <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>
+                                        <%= region.name %>
+                                    </p>
+                                </a>
+                            </div>
+                            <% }); %>
 
-<!-- ===== District Details ========== -->
-<section class="home">
-  <div class="home-content">
-      <h3 style="font-size: 1.5rem;">Discover <span>District</span></h3>
-      <h1><span><%= place.name %></span>
-      <p>A Hidden Gem in FATA</p></h1>
-      <p><strong><span><%= place.description %></span></strong><br> <br>
-        Enjoy the stunning views of snow-capped mountains with worm hospitality and immerse yourself in the local culture.
-       </p>
-       <a href="#regions" class="btn-2"><%= place.name%> Regions <i class="fa fa-arrow-down"></i></a>
-  </div>
-  <div class="img-box">
-      <div id="map"></div>
-  </div>
-</section>
-
-<!-- Regions Section -->
-<section class="about-region" id="regions">
-  <div class="about-region-content">
-      <div class="about-region-img">
-          <img src="<%= place.image %>" alt="<%= place.image  %>">
-      </div>
-  </div>
-  <div class="about-region-content">
-    <% let count = 0; %>
-    <% place.regions.forEach(region => { %>
-      <% count += 1; %>
-    <% }); %>
-    <h2 class="Heading"><%= place.name %> has total <span><%= count %></span> Regions </h2>
-    <h3>Each has their own Speciality</h3>
-    <p>Let's explore one by one with their unique styles and culture.</p>
-    <a href="#regions-list" class="btn-2">Regions <i class="fa fa-arrow-down"></i></a>
-  </div>
-</section>
-
-<!-- Regions Cards -->
- <!-- Cards -->
- <div class="main" id="regions-list">
-  <h1><%= place.name%> Regions List</h1>
-  <ul class="cards">
-  <% place.regions.forEach(region => { %>
-      <li class="cards_item">
-        <div class="card">
-          <div class="card_image"><img src="<%=region.image%>"></div>
-          <div class="card_content">
-            <h2 class="card_title"><%=region.name%></h2>
-            <p class="card_text"><%=region.description%></p>
-            <a href="/region/<%=region.name%>"><button class="btn-card card_btn-card">Explore <%=region.name%></button></a>
-          </div>
+                    </div>
+                    <a class="btn btn-primary py-3 px-5 mt-2" href="#regions">
+                        <%= place.name %> Regions <i class="fa fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-      </li>
-  <% }); %>
-</ul>
-  
-</div>
- <!-- Cards End -->
-<!-- ===== District Details End========== -->
-
-
-
-<%- include('partials/footer') %>
-<style>
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-text-decoration: none;
-list-style: none;
-}
-
-:root {
-  --primary-color:#228B22;
---white-color: #fff;
---light-gray-color: #ddd;
---blue-color: #67cd67;
---transparent-gray:rgba(54, 54, 54, 0.8);
---gray-color:rgb(241, 241, 241);
-
-}
-
-.logo{
-font-size: 25px;
-color: var(--white-color);
-font-weight:600 ;
-transition: all 0.3s ease;
-}
-
-.logo:hover{
-color: var(--primary-color);
-text-shadow: 0 0 25px var(--primary-color),
-           0 0 50px var(--primary-color),;
-transform: scale(1.1);
-}
-
-h1{
-  font-size: 3rem !important;
-}
-span{
-color: var(--primary-color);
-}
-section{
-  overflow: hidden;
-  width: 100%;
-}
-.navbar a{
-font-size: 18px;
-color: var(--white-color);
-font-weight: 500;
-margin: 0 20px;
-border-bottom: 3px solid transparent;
-transition: 0.3s ease;
-}
-
-.navbar a:hover,
-.navbar a.active{
-color: var(--primary-color);
-border-bottom: 3px solid var(--primary-color);
-}
-
-.contact{
-padding: 10px 28px;
-background-color:var(--white-color);
-color: black;
-border: 2px solid transparent;
-border-radius: 8px;
-font-size: 16px;
-letter-spacing: 1px;
-font-weight: 600;
-transform: 0.3s ease;
-}
-
-.contact:hover{
-background-color: var(--primary-color);
-box-shadow: 0 0 25px var(--primary-color);
-color: var(--white-color);
-}
-
-.home{
-width: 100%;
-min-height: 100vh;
-background: var(--gray-color);
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 7em;
-padding: 30px 12% 0;
-}
-
-.home-content{
-max-width: 800px;
-}
-
-.home-content h3{
-font-size: 42px;
-}
-
-.home-content h1{
-font-size: 62px;
-line-height: 1.2;
-}
-
-.home-content p{
-font-size: 18px;
-margin:25px 0 30px ;
-}
-
-.btn-card-box{
-width: 345px;
-display: flex;
-gap: 2em;
-}
-
-.btn-card-1{
-padding: 15px 28px;
-background-color: black;
-color: var(--white-color);
-border: 2px solid transparent;
-border-radius: .5rem;
-letter-spacing: 1px;
-font-weight: 600;
-transform: 0.3s ease;
-
-}
-
-.btn-card-1:hover{
-background-color: var(--white-color);
-color: black;
-border: 2px solid black;
-}
-
-.btn-card-2{
-padding: 15px 28px;
-background-color: var(--primary-color);
-color: var(--white-color);
-border: 2px solid transparent;
-border-radius: .5rem;
-font-size: 18px;
-letter-spacing: 1px;
-font-weight: 600;
-transform: 0.3s ease;
-cursor: pointer;
-}
-
-.btn-card-2:hover{
-background-color:var(--white-color);
-color: var(--primary-color);
-}
-
-.img-box #map{
-border-radius: 0.7rem;
-width: 550px;
-height: 550px;
-}
-
-::-webkit-scrollbar{
-width: 15px;
-}
-
-::-webkit-scrollbar-thumb{
-background-color: var(--primary-color);
-}
-
-::-webkit-scrollbar-track{
-background-color: rgba(0, 0, 0, 0.6 );
-width: 50px;
-}
-
-.about-region{
-  margin-top: 2rem;
-width: 100%;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-pad: 12% 8%;
-gap: 10em;
-/* background-color: black; */
-}
-
-.about-region-img img{
-position:relative ;
-margin: 2em 3em;
-width: 550px;
-box-shadow:0 0 25px var(--primary-color)
-         0 0 25px var(--primary-color);
-border-radius: 1rem;
-}
-
-.about-region-content h2{
-font-size: 2rem;
-color: #282828;
-}
-.about-region-content span{
-  font-size: 2rem;
-}
-
-.about-region-content h3{
-font-size: 1.5rem;
-color: #282828;
-}
-.about-region-content p{
-color:#282828;
-font-size: 20px;
-margin: 2em 0 3em;
-}
-
-/* Cards */
-/* Font */
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
-
-/* Design */
-
-.main{
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.main h1 {
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-}
-
-.main img {
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-.btn-card {
-  color: #ffffff;
-  padding: 0.8rem;
-  font-size: 14px;
-  text-transform: uppercase;
-  border-radius: 4px;
-  font-weight: 400;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
-}
-
-.btn-card:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.cards {
-  height: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.card_image {
-    width: 400px;
-    height: 200px;
-    background-size: cover;
-    overflow: hidden; /* Ensures that the image doesn't overflow the container */
-    position: relative;
-}
-
-.card_image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the image covers the entire container without distorting */
-    position: absolute; /* Ensures the image stays within the bounds of .card_image */
-    top: 0;
-    left: 0;
-}
-.cards_item {
-  display: flex;
-  padding: 1rem;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33.3333%;
-  }
-}
-
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.card_content {
-  padding: 1rem;
-  background-color: var(--primary-color);
-}
-
-.card_title {
-  color: #ffffff;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  margin: 0px;
-}
-
-.card_text {
-  color: #ffffff;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 1.25rem;    
-  font-weight: 400;
-}
-.made_by{
-  font-weight: 400;
-  font-size: 13px;
-  margin-top: 35px;
-  text-align: center;
-}
-
-/* cards end */
-
-/* Tablet Screens */
-@media (max-width: 1105px){
-  .about-region{
-    flex-direction: column;
-    gap: 1em;
-  }
-}
-@media (max-width: 768px) {
-
-.home {
-  padding: 20px 5%;
-  gap: 4em;
-  flex-direction: column;
-}
-
-.home-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.home-content h3 {
-  font-size: 32px;
-}
-
-.home-content h1 {
-  font-size: 48px;
-}
-
-.home-content p {
-  font-size: 16px;
-}
-
-.img-box {
-  width: 100%;
-}
-
-.img-box #map {
-  width: 100%;
-  height: 330px;
-}
-
-.about-region {
-  flex-direction: column;
-  padding: 12% 5% 6% 10%;
-  gap: 5em;
-}
-.about-region-content{
-  flex-direction: column;
-}
-
-.about-region-img img {
-  width: 100%;
-  margin: 1em 0;
-}
-
-}
-/* Phone Screens */
-@media (max-width: 480px) {
-  *{
-    width: 100%;
-  }
-  html{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-.home {
-  padding: 15px 5%;
-  gap: 2em;
-}
-
-.home-content h3 {
-  font-size: 24px;
-}
-
-.home-content h1 {
-  font-size: 36px;
-}
-
-.home-content p {
-  font-size: 14px;
-}
-.img-box #map {
-  width: 100%;
-  height: 230px;
-}
-.btn-card-box {
-  flex-direction: column;
-  gap: 1em;
-  width: 100%;
-}
-
-.about-region {
-  padding: 10% 5%;
-  gap: 2em;
-  flex-direction: column;
-}
-
-.about-region-content h2 {
-  font-size: 48px;
-}
-
-.about-region-content h3 {
-  font-size: 1.5rem;
-}
-
-.about-region-content p {
-  font-size: 16px;
-}
-}
-
-</style>
-<!-- Google Maps JavaScript API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYx1t41Tpk35TFCp71JyeNAfyJJAszZ7Y&callback=initMap&libraries=places&v=weekly" async defer></script>
-<script>
-  function initMap() {
-    const lat = parseFloat("<%= place.lat %>");
-    const lng = parseFloat("<%= place.lng %>");
-    console.log(lat, lng);
-    const mapOptions = {
-      center: { lat:lat, lng: lng }, // Center location
-      zoom: 10,
-    };
-    const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    
-    // Create a marker at the center
-    new google.maps.Marker({
-      position: mapOptions.center,
-      map: map,
-      title: 'Center Location',
-    });
-
-    // Create a PlacesService instance
-    const service = new google.maps.places.PlacesService(map);
-
-    // Define icons URLs
-    const hospitalicons = 'https://maps.google.com/mapfiles/ms/iconss/hospital.png';
-    const hotelicons = 'https://maps.google.com/mapfiles/ms/iconss/lodging.png';
-
-    // Search for hospitals
-    service.nearbySearch({
-      location: mapOptions.center,
-      radius: 5000, // Search within 5 km radius
-      type: 'hospital'
-    }, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < results.length; i++) {
-          const place = results[i];
-          new google.maps.Marker({
-            position: place.geometry.location,
-            map: map,
-            title: place.name,
-            icons: hospitalicons,
-          });
+    </div>
+    <!-- About End -->
+    <!-- Regions Start -->
+    <div class="container-xxl py-5" id="regions">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3">Regions</h6>
+                <h1 class="mb-5">Popular Regions</h1>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <% place.regions.forEach(region=> { %>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="package-item">
+                            <div class="overflow-hidden"
+                                style="min-width: 100%; min-height: 250px; background-size: cover; max-width: 100%; max-height: 250px;">
+                                <img class="img-fluid" src="<%= region.image %>" alt=""
+                                    style="width: 100%; height: 250px; background-size: cover;">
+                            </div>
+                            <div class="d-flex border-bottom">
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-map-marker-alt text-primary me-2"></i>
+                                    <%= region.name %>
+                                </small>
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-map text-primary me-2"></i>
+                                    <%= place.name %>
+                                </small>
+                                <small class="flex-fill text-center py-2">
+                                    <i class="fa fa-user text-primary me-2"></i>
+                                    <%= region.ratings %>
+                                </small>
+                            </div>
+                            <div class="text-center p-4">
+                                <h3 class="mb-0">
+                                    <%= region.name %>
+                                </h3>
+                                <div class="mb-3">
+                                    <% for (let i=0; i < 5; i++) { %>
+                                        <% let starClass=i < region.ratings ? 'text-primary' : 'text-muted' ; %>
+                                            <small class="fa fa-star <%= starClass %>"></small>
+                                            <% } %>
+                                </div>
+                                <p>
+                                    <%= region.name %> is located in District <%= place.name %> This Region known <%=
+                                                region.description %>
+                                </p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a href="/region/<%- region.name %>" class="btn btn-sm btn-primary px-3 border-end"
+                                        style="border-radius: 30px 0 0 30px;">Explore Region</a>
+                                    <a href="/district/<%- place.name %>" class="btn btn-sm btn-primary px-3"
+                                        style="border-radius: 0 30px 30px 0;">Explore District</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+    </div>
+    <!-- Regions End -->
+
+
+    <!-- Google Maps JavaScript API -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYx1t41Tpk35TFCp71JyeNAfyJJAszZ7Y&callback=initMap&libraries=places&v=weekly"
+        async defer></script>
+    <script>
+        function initMap() {
+            // Replace these with the latitude and longitude of the region you want to show
+            const regionLat = parseFloat("<%- place.lat %>");
+            const regionLng = parseFloat("<%- place.lng %>");
+
+
+            const mapOptions = {
+                center: { lat: regionLat, lng: regionLng },
+                zoom: 13,
+            };
+
+            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            // Add a marker for the region
+            const marker = new google.maps.Marker({
+                position: { lat: regionLat, lng: regionLng },
+                map: map,
+                title: 'FATA Region',
+            });
+
+            // Create a PlacesService instance
+            const service = new google.maps.places.PlacesService(map);
+
+            // Define icons URLs
+            const hospitalIcon = 'https://maps.google.com/mapfiles/ms/icons/hospital.png';
+            const hotelIcon = 'https://maps.google.com/mapfiles/ms/icons/lodging.png';
+            const shopIcon = 'https://maps.google.com/mapfiles/ms/icons/shopping.png';
+
+            // Search for hospitals
+            service.nearbySearch({
+                location: { lat: regionLat, lng: regionLng },
+                radius: 5000, // Search within 5 km radius
+                type: 'hospital'
+            }, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach(place => {
+                        new google.maps.Marker({
+                            position: place.geometry.location,
+                            map: map,
+                            title: place.name,
+                            icon: hospitalIcon,
+                        });
+                    });
+                } else {
+                    console.error('Failed to load hospitals: ' + status);
+                }
+            });
+
+            // Search for hotels
+            service.nearbySearch({
+                location: { lat: regionLat, lng: regionLng },
+                radius: 5000, // Search within 5 km radius
+                type: 'lodging'
+            }, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach(place => {
+                        new google.maps.Marker({
+                            position: place.geometry.location,
+                            map: map,
+                            title: place.name,
+                            icon: hotelIcon,
+                        });
+                    });
+                } else {
+                    console.error('Failed to load hotels: ' + status);
+                }
+            });
+
+            // Search for shops
+            service.nearbySearch({
+                location: { lat: regionLat, lng: regionLng },
+                radius: 5000, // Search within 5 km radius
+                type: 'store'
+            }, (results, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    results.forEach(place => {
+                        new google.maps.Marker({
+                            position: place.geometry.location,
+                            map: map,
+                            title: place.name,
+                            icon: shopIcon,
+                        });
+                    });
+                } else {
+                    console.error('Failed to load shops: ' + status);
+                }
+            });
         }
-      } else {
-        console.error('Failed to load hospitals: ' + status);
-      }
-    });
-
-    // Search for hotels
-    service.nearbySearch({
-      location: mapOptions.center,
-      radius: 3000, // Search within 5 km radius
-      type: 'lodging'
-    }, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < results.length; i++) {
-          const place = results[i];
-          new google.maps.Marker({
-            position: place.geometry.location,
-            map: map,
-            title: place.name,
-            icons: hotelicons,
-          });
-        }
-      } else {
-        console.error('Failed to load hotels: ' + status);
-      }
-    });
-  }
-</script>
+    </script>
+    <%- include('partials/footer') %>

@@ -3,6 +3,8 @@ const router = express.Router();
 const Place = require('../models/place');
 const multer = require("multer");
 const path = require('path');
+const fetchPlaces = require('../middleware/fetchPlaces'); // Import the middleware
+
 // Configure Multer
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -10,30 +12,31 @@ const upload = multer({ storage: storage });
 // Serve static files from the 'public' directory
 router.use(express.static(path.join(__dirname, 'public')));
 
+// Apply the middleware to fetch data for all routes
+router.use(fetchPlaces);
 
-router.get('/', async(req, res) => {
-    const places = await Place.find().select('name description image ratings regions description');
-    res.render("home",{places});
+router.get('/', (req, res) => {
+    res.render("home", { places: res.locals.places });
 });
 
-router.get('/about',(req, res)=>{
-    res.render("about");
-})
+router.get('/about', (req, res) => {
+    res.render("about",{ places: res.locals.places });
+});
 
-router.get('/tours',async(req, res)=>{
-    const places = await Place.find().select('name description image ratings regions description');
-    res.render("tours",{places});
-})
+router.get('/tours',(req, res) => {
+    res.render("tours", { places: res.locals.places });
+});
+router.get('/allDistricts',(req, res) => {
+    res.render("allDistricts", { places: res.locals.places });
+});
 
-router.get('/destination',async(req, res)=>{
-    const places = await Place.find().select('name description image ratings regions description');
-    res.render("destination",{places});
-})
+router.get('/destination', (req, res) => {
+    res.render("destination", { places: res.locals.places });
+});
 
-router.get('/gallery', async(req, res)=>{
-    const places = await Place.find().select('name description image ratings regions description');
-    res.render("gallery",{places});
-})
+router.get('/gallery', (req, res) => {
+    res.render("gallery", { places: res.locals.places });
+});
 
 // Your routes here
 router.get('/district/:districtName?', async (req, res) => {
@@ -44,7 +47,7 @@ router.get('/district/:districtName?', async (req, res) => {
     }
 
     try {
-        const place = await Place.findOne({ name: districtName }).select('name description regions image lat lng');
+        const place = res.locals.places.find(p => p.name === districtName);
 
         if (!place) {
             return res.status(404).send('District not found');
@@ -56,25 +59,23 @@ router.get('/district/:districtName?', async (req, res) => {
         res.status(500).send('Server error');
     }
 });
-// Handle dynamic region requests
+
 router.get('/region/:regionName', async (req, res) => {
     try {
         const regionName = req.params.regionName;
-        const place = await Place.findOne({ "regions.name": regionName }, { "regions.$": 1 });
-        
+        const place = res.locals.places.find(p => p.regions.some(r => r.name === regionName));
+
         if (!place) {
             return res.status(404).send('Region not found');
         }
 
-        const region = place.regions[0];
+        const region = place.regions.find(r => r.name === regionName);
         res.render('region', { region });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
     }
 });
-
-
 
 // Render the upload form
 router.get("/upload", (req, res) => {
@@ -136,9 +137,7 @@ router.post("/upload", upload.none(), async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
-        
     }
 });
-
 
 module.exports = router;

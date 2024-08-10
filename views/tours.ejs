@@ -1,167 +1,62 @@
-<%- include('partials/header') %>
-
-    <!-- ====== Travel Countries ========== -->
-    <section id="travel-countries">
-        <div class="container">
-            <p class="heading-normal-txt">MOST POPULAR</p>
-            <h2 class="headings">Travel <span>Regions</span></h2>
-            <% places.forEach((place, index)=> { %>
-                <% place.regions.sort((a, b)=> b.ratings - a.ratings); %>
-                    <!-- Alternate display of places -->
-                    <% if (index % 2===0) { %>
-                        <!-- First section -->
-                        <div class="travel-countries-wrapper">
-                            <div class="countries-content">
-                                <h2 class="secondary-heading">
-                                    <%= place.name %>
-                                </h2>
-                                <p class="lead">
-                                    District <%= place.name %> a beautiful place to visit. The main region of this
-                                        district is <%= place.description %>
-                                </p>
-                                <ul>
-                                    <% let regionName2="" %>
-                                        <% place.regions.forEach(region=> { %>
-                                            <% regionName2=region.name %>
-                                                <a href="/region/<%= region.name %>">
-                                                    <li class="country-names"><i class="fa fa-location-dot"></i>
-                                                        <%= region.name %>
-                                                    </li>
-                                                </a>
-                                                <% }); %>
-                                </ul>
-                                <a href="/district/<%=place.name%>"><button type="button" class="primary-btn">Explore <i
-                                            class="fa fa-arrow-right"></i></button></a>
+<%- include ('partials/header') %>
+<!-- Regions Start -->
+<div class="container-xxl py-5" id="regions">
+    <div class="container">
+        <hr>
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Regions</h6>
+            <h1 class="mb-5">All Regions</h1>
+        </div>
+        <hr>
+        <div class="row g-4 justify-content-center"> 
+                <% places.forEach(place=>{ %>
+                    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <h6 class="section-title bg-white text-center text-primary px-3">District</h6>
+                        <h4 class="mb-5"><%= place.name %> Regions</h4>
+                    </div>
+                    <% place.regions.forEach(region => { %> 
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="package-item">
+                            <div class="overflow-hidden" style="min-width: 100%; height: 250px;">
+                                <img class="img-fluid" src="<%= region.image %>" alt="<%= region.name %>" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
-                            <div class="slider-content-wrapper swiper3">
-                                <div class="swiper-wrapper">
-                                    <% let regionName="" %>
-                                        <% place.regions.forEach(region=> { %>
-                                            <% regionName=region.name %>
-                                                <div class="swiper-slide carousel">
-                                                    <img src="<%= region.image %>" alt="">
-                                                    <div class="carousel-img-verlay">
-                                                        <div class="img-content">
-                                                            <h2><i class="fa fa-location-dot"></i>
-                                                                <%= region.name %>
-                                                            </h2>
-                                                            <div class="hidden-content-carousel">
-                                                                <span>
-                                                                    <a class="btn-primary" href="/region/<%=regionName%>">Explore</a></span><i class="fa fa-arrow-right"></i>
-                                                                <span>
-                                                                    <i class="fa fa-user"></i> Ratings: <%=
-                                                                        region.ratings %>
-                                                                </span>
-                                                                <span><i class="fa fa-location-dot"></i>
-                                                                    <%= place.name %>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="price-label">
-                                                        <p>
-                                                            <%= region.ratings %> ⭐
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <% }); %>
+                            <div class="d-flex border-bottom">
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-map-marker-alt text-primary me-2"></i>
+                                    <%= region.name %>
+                                </small>
+                                <small class="flex-fill text-center border-end py-2">
+                                    <i class="fa fa-map text-primary me-2"></i>
+                                    <%= place.name %>
+                                </small>
+                                <small class="flex-fill text-center py-2">
+                                    <i class="fa fa-user text-primary me-2"></i>
+                                    <%= region.ratings %>
+                                </small>
+                            </div>
+                            <div class="text-center p-4">
+                                <h3 class="mb-0"><%= region.name %></h3>
+                                <div class="mb-3">
+                                    <% for (let i = 0; i < 5; i++) { %>
+                                        <% let starClass = i < region.ratings ? 'text-primary' : 'text-muted'; %>
+                                        <small class="fa fa-star <%= starClass %>"></small>
+                                    <% } %>
+                                </div>
+                                <p><%= region.name %> is located in District <%= place.name %>. This Region is known for <%= region.description %>.</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a href="/region/<%= region.name %>" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Explore Region</a>
+                                    <a href="/district/<%= place.name %>" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Explore District</a>
                                 </div>
                             </div>
                         </div>
-                        <% } else { %>
-                            <!-- Second section -->
-                            <div class="second-content">
-                                <div class="slider-content-wrapper swiper3">
-                                    <div class="swiper-wrapper">
-                                        <% let regionName3="" %>
-                                        <% place.regions.forEach(region=> { %>
-                                            <% regionName3=region.name%>
-                                            <div class="swiper-slide carousel">
-                                                <img src="<%= region.image %>" alt="">
-                                                <div class="carousel-img-verlay">
-                                                    <div class="img-content">
-                                                        <h2><i class="fa fa-location-dot"></i>
-                                                            <%= region.name %>
-                                                        </h2>
-                                                        <div class="hidden-content-carousel">
-                                                            <span><i class="fa fa-arrow-left"></i><a
-                                                                    href="/region/<%=region.name%>">Explore</a></span>
-                                                            <span><i class="fa fa-user"></i> Ratings: <%= region.ratings
-                                                                    %></span>
-                                                            <span><i class="fa fa-location-dot"></i>
-                                                                <%= place.name %>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="price-label">
-                                                    <p>
-                                                        <%= region.ratings %> ⭐
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <% }); %>
-                                    </div>
-                                </div>
-                                <div class="countries-content">
-                                    <h2 class="secondary-heading">
-                                        <%= place.name %>
-                                    </h2>
-                                    <p class="lead">
-                                        District <%= place.name %> is a beautiful place. Its main region is <%=
-                                                place.description %>. Below is the list of all the regions.
-                                    </p>
-                                    <div class="country-names">
-                                        <ul>
-                                            <% place.regions.forEach(region=> { %>
-                                                <a href="/region/<%=region.name%>">
-                                                    <li>
-                                                        <i class="fa fa-location-dot"></i>
-                                                        <%= region.name %>
-                                                    </li>
-                                                </a>
-                                                <% }); %>
-                                        </ul>
-                                    </div>
-                                    <a href="/district/<%=place.name%>">
-                                        <button type="button" class="primary-btn">Explore <i
-                                            class="fa fa-arrow-right"></i></button>
-                                    </a>
-                                </div>
-                            </div>
-                            <% } %>
-                                <% }); %>
+                    </div>
+                    
+                <% }) %>
+                <hr>
+                <%}) %>
+               
         </div>
-    </section>
-    <!-- ====== Travel Countries end========== -->
-
-    <!-- ========= STAIIC COUNTER NUMBERS ====== -->
-    <section id="static-container" style="background-image: url(/Img/Kurram_parachinar.jpg);">
-        <div class="container">
-            <div class="static-wrapper">
-                <div class="static-icons">
-                    <i class="fa fa-plane-departure"></i>
-                    <p class="number" data-ceil="600">600</p>
-                    <p class="txt">Flight Booking</p>
-                </div>
-                <div class="static-icons">
-                    <i class="fa fa-home"></i>
-                    <p class="number" data-ceil="200">200</p>
-                    <p class="txt">Amazing Tour</p>
-                </div>
-                <div class="static-icons">
-                    <i class="fa fa-ship"></i>
-                    <p class="number" data-ceil="200">200</p>
-                    <p class="txt">Cruises Booking</p>
-                </div>
-                <div class="static-icons">
-                    <i class="fa fa-ticket"></i>
-                    <p class="number" data-ceil="100">100</p>
-                    <p class="txt">Ticket Booking</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ======== STATIC COUNTER NUMBER END ======= -->
-
-    <%- include('partials/footer') %>
+    </div>
+</div>
+<!-- Regions End -->
+<%- include ('partials/footer') %>
