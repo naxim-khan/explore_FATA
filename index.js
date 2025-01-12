@@ -9,26 +9,39 @@ const path = require('path');
 
 const app = express();
 
+// Set up views and static files
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs'); // or pug, hbs, etc.
-
-
-
-app.use(bodyParser.urlencoded({extended:true}));
-
-// Serve static files from the 'public' directory
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set port
 const port = process.env.PORT || 3000;
-// Connect Mongodb
-mongoose.connect(process.env.MONGODB_URI).then(()=>{
-    console.log("MongoDb connected Successfully...!");
-  }).catch((err)=>{
-    console.log("caught error connecting mongodb :",err);
-  });
 
+// Get MongoDB URI
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+    console.error("Error: MONGODB_URI is not defined. Please set it in the .env file or as an environment variable.");
+    process.exit(1); // Exit the application if the URI is not defined
+}
+
+// Connect to MongoDB
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then(() => {
+        console.log("MongoDB connected successfully!");
+    })
+    .catch((err) => {
+        console.error("Caught error connecting MongoDB:", err);
+    });
+
+// Set up routes
 app.use('/', indexRoutes);
 
-app.listen(port, ()=>{
-    console.log("Server is listening on: ", port );
-})
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});
